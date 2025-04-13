@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>資料結構視覺化教學系統</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- 先確保外部函式庫按正確順序載入 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
+</head>
+<body>
+  <div id="info">
+    <p id="currentOperation">資料結構視覺化教學系統 - 請選擇資料結構類型</p>
+  </div>
+  
+  <!-- 浮動按鈕 -->
+  <button id="toggleCodeBtn" class="toggle-panel-button" title="隱藏/顯示程式碼示範">
+    <span>&lt;/&gt;</span>
+  </button>
+  
+  <button id="toggleMemoryBtn" class="toggle-panel-button" title="隱藏/顯示記憶體佈局">
+    <span>M</span>
+  </button>
+  
+  <button id="toggleFormulaBtn" class="toggle-panel-button" title="隱藏/顯示公式與說明">
+    <span>F</span>
+  </button>
+  
+  <!-- 模組容器 -->
+  <div id="moduleContainer"></div>
+  
+  <!-- 浮動視窗容器 -->
+  <div id="floatingWindowsContainer"></div>
+  
+  <!-- 控制面板 -->
+  <div class="controls-container">
+    <button id="toggleControlsBtn">隱藏控制面板</button>
+    <div class="controls" id="controlsPanel">
+      <div class="tabs">
+        <div class="tab active" data-module="array">多維陣列</div>
+        <div class="tab" data-module="polynomial">多項式</div>
+        <div class="tab" data-module="recursion">遞迴</div>
+        <div class="tab" data-module="complexity">演算法複雜度</div>
+        <div class="tab" data-module="hanoi">河內塔</div>
+        <div class="tab" data-module="linkedlist">鏈結串列</div>
+        <div class="tab" data-module="stack">堆疊</div>
+        <div class="tab" data-module="queue">佇列</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="moduleDescription">模組說明</label>
+        <div id="moduleDescription">多維陣列模組展示了二維和三維陣列在記憶體中的儲存方式，包括行優先和列優先的排列方式。</div>
+      </div>
+      
+      <div class="button-group">
+        <button id="loadModuleBtn">載入選定模組</button>
+        <button id="resetModuleBtn" disabled>重置當前模組</button>
+        <button id="pauseResumeBtn" disabled>暫停動畫</button>
+        <button id="stepForwardBtn" disabled>下一步</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 載入畫面 -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loader"></div>
+    <div>正在載入資料結構視覺化模組...</div>
+  </div>
+  
+  <!-- 引入自定義腳本 -->
+  <script src="js/floatingWindow.js"></script>
+  <script src="js/main.js"></script>
+  <!-- 模組腳本會在main.js中按需載入 -->
+</body>
+</html>

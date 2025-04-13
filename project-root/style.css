@@ -1,0 +1,374 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: "微軟正黑體", Arial, sans-serif;
+  font-size: 16px;
+  background-color: #111111;
+  color: white;
+}
+
+#info {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  pointer-events: none;
+  background-color: rgba(0,0,0,0.5);
+  padding: 5px 0;
+}
+
+.controls-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.controls {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.8);
+  padding: 15px 20px;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.5s ease;
+  overflow: hidden;
+  max-height: 300px;
+  z-index: 100;
+  border: 1px solid #4CAF50;
+  border-bottom: none;
+  pointer-events: auto;
+}
+
+.controls.collapsed {
+  max-height: 0;
+  padding: 0 20px;
+  border-top-width: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+#toggleControlsBtn {
+  width: 200px;
+  margin-bottom: -1px;
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 999;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+  pointer-events: auto;
+}
+
+#toggleControlsBtn:hover {
+  background-color: #45a049;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+select, input {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.tab {
+  padding: 8px 16px;
+  background-color: #333;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  margin: 0 5px 5px 0;
+}
+
+.tab.active {
+  background-color: #4CAF50;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #4CAF50;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.toggle-panel-button {
+  position: fixed;
+  z-index: 1000;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+#toggleCodeBtn {
+  top: 10px;
+  right: 10px;
+}
+
+#toggleMemoryBtn {
+  top: 60px;
+  right: 10px;
+}
+
+#toggleFormulaBtn {
+  top: 110px;
+  right: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#moduleContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* 以下是浮動視窗相關的 CSS 修正，其他 CSS 保持不變 */
+
+/* 浮動視窗樣式 */
+.floating-window {
+  position: absolute;
+  background-color: rgba(0,0,0,0.8);
+  border: 1px solid #4CAF50;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+  min-width: 300px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 防止內容溢出 */
+}
+
+.floating-window-header {
+  padding: 10px;
+  background-color: #4CAF50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+  flex-shrink: 0; /* 防止標題欄縮小 */
+}
+
+.floating-window-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.floating-window-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-window-content {
+  padding: 15px;
+  overflow-y: auto; /* 啟用垂直滾動 */
+  flex-grow: 1; /* 允許內容區域增長填充剩餘空間 */
+  height: calc(100% - 40px); /* 減去標題欄的高度 */
+  box-sizing: border-box;
+}
+
+/* 程式碼視窗特定樣式 */
+.code-window pre {
+  margin: 0;
+  white-space: pre-wrap; /* 保留格式但允許文字換行 */
+  word-wrap: break-word; /* 長單詞換行 */
+  color: #DDD;
+  font-family: monospace;
+  overflow-x: auto; /* 如果代碼行太長，允許水平滾動 */
+}
+
+.code-window code {
+  color: #66FF66;
+}
+
+.code-comment {
+  color: #888;
+}
+
+/* 記憶體視窗特定樣式 */
+.memory-window .memory-row {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.memory-window .memory-address {
+  width: 100px;
+  color: #aaa;
+}
+
+.memory-window .memory-value {
+  min-width: 80px;
+  text-align: center;
+  margin-right: 5px;
+  background-color: #333;
+  padding: 2px;
+}
+
+.memory-window .memory-value.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* 公式視窗特定樣式 */
+.formula-window .formula {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+.formula-window .highlight {
+  color: #FF5722;
+  font-weight: bold;
+}
+
+/* 調整大小手柄 */
+.resizer {
+  width: 10px;
+  height: 10px;
+  background-color: #4CAF50;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: nwse-resize;
+  z-index: 1001;
+}
+
+/* 確保所有浮動視窗都有明確的大小限制 */
+.floating-window.code-window {
+  width: 500px;
+  height: 400px;
+}
+
+.floating-window.memory-window {
+  width: 450px;
+  height: 350px;
+}
+
+.floating-window.formula-window {
+  width: 450px;
+  height: 350px;
+}
+
+.code-window .floating-window-content {
+  padding: 0; /* 移除padding以確保代碼區域充滿整個內容區 */
+}
+
+.code-window pre {
+  margin: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  border-radius: 0 0 8px 8px;
+}
+
+.code-window code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
